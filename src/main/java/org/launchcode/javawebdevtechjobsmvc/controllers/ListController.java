@@ -21,13 +21,13 @@ public class ListController {
     static HashMap<String, String> columnChoices = new HashMap<>();
     static HashMap<String, Object> tableChoices = new HashMap<>();
 
-    public ListController () {
+    public ListController() {
         columnChoices.put("all", "All");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
         columnChoices.put("coreCompetency", "Skill");
-
+//        tableChoices.put("all",JobData.findAll());
         tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("location", JobData.getAllLocations());
         tableChoices.put("positionType", JobData.getAllPositionTypes());
@@ -38,10 +38,10 @@ public class ListController {
     public String list(Model model) {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
-        model.addAttribute("employers", JobData.getAllEmployers());
+        /*model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
-        model.addAttribute("skills", JobData.getAllCoreCompetency());
+        model.addAttribute("skills", JobData.getAllCoreCompetency());*/
 
         return "list";
     }
@@ -49,7 +49,7 @@ public class ListController {
     @RequestMapping(value = "jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         ArrayList<Job> jobs;
-        if (column.toLowerCase().equals("all")){
+        if (column.toLowerCase().equals("all")) {
             jobs = JobData.findAll();
             model.addAttribute("title", "All Jobs");
         } else {
@@ -57,7 +57,6 @@ public class ListController {
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
-
         return "list-jobs";
     }
 }
