@@ -37,6 +37,7 @@ public class SearchController {
         }
         model.addAttribute("columns", columnChoices);
         model.addAttribute("jobs", jobs);
+        model.addAttribute("preSelectedValue",searchType);
         return "search";
     }
 }
